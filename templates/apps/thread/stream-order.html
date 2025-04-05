@@ -1,0 +1,27 @@
+{% extends 'apps/base/include.html' %}
+{% load humanize %}
+
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+
+    <input type="hidden" name="stream_id" value="{{ stream.id }}">  <!-- ✅ Ensure stream_id is included -->
+
+    <div class="mb-3">
+        <label for="last_name" class="form-label">Name:</label>
+        <input class="form-control" id="last_name" name="last_name" type="text" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="phone_number" class="form-label">Phone number:</label>
+        <input class="form-control" id="phone_number" name="phone_number" type="text" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity:</label>
+        <input class="form-control" id="quantity" name="quantity" type="number" min="1" value="1" required>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Order</button>
+</form>
+{% endblock %}

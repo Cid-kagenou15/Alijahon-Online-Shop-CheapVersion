@@ -1,0 +1,41 @@
+[
+  {
+    "model": "myapp.Product",
+    "pk": 1,
+    "fields": {
+      "name": "Luxury Men Watch",
+      "slug": "luxury-men-watch",
+      "description": "🌟 Luxury & Premium: A statement of success and refinement. Crafted with premium materials, a sapphire crystal display, and automatic movement, this watch embodies luxury and precision engineering. Elevate your wrist game with a timepiece that speaks volumes.",
+      "price": 1000.00,
+      "image": "products/71TOxRwstaL._AC_UL1500_.jpg",
+      "category": 11,
+      "stock": 5
+    }
+  },
+  {
+    "model": "myapp.Product",
+    "pk": 2,
+    "fields": {
+      "name": "iPhone 16 Plus",
+      "slug": "iphone-16-plus",
+      "description": "📱 iPhone 16: Aluminum frame and glass back, stunning OLED display, powered by A18 chip, dual-camera system. The epitome of innovation and elegance, delivering cutting-edge technology and style to your hands.",
+      "price": 1500.00,
+      "image": "products/apple-iphone-16-pro-max-256gb-desert-titanium-2-1200x1200.jpg",
+      "category": 14,
+      "stock": 5
+    }
+  },
+  {
+    "model": "myapp.Product",
+    "pk": 3,
+    "fields": {
+      "name": "Headphone",
+      "slug": "headphone",
+      "description": "🎧 Headphones: Immersive sound with active noise cancellation, crystal-clear mic for calls, lightweight design, and 30-hour battery life. Perfect for audiophiles seeking unmatched quality, comfort, and seamless connectivity with Apple devices.",
+      "price": 1200.00,
+      "image": "products/71Rz4nNNFL._AC_SL1500_.jpg",
+      "category": 14,
+      "stock": 5
+    }
+  }
+]

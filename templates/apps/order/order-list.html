@@ -1,0 +1,49 @@
+{% extends 'apps/base/include.html' %}
+
+{% block body %}
+    <div class="container py-4">
+        <h2 class="text-center text-primary mb-4">Your Orders</h2>
+        <div class="card shadow-lg">
+            <div class="card-header bg-gradient-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Orders</h5>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-light btn-sm">New <i class="fas fa-plus ms-1"></i></button>
+                    <button class="btn btn-light btn-sm">Filter <i class="fas fa-filter ms-1"></i></button>
+                    <button class="btn btn-light btn-sm">Export <i class="fas fa-external-link-alt ms-1"></i></button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-dark text-white">
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-end">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>
+                                    <a href="../../../app/e-commerce/orders/order-details.html"
+                                       class="fw-bold text-decoration-none text-dark">
+                                        #{{ order.id }}</a> by <strong>{{ order.last_name }}</strong><br>
+                                    <a href="mailto:{{ order.phone_number }}"
+                                       class="text-muted small">{{ order.phone_number }}</a>
+                                </td>
+                                <td>{{ order.ordered_at|date:'d/m/Y' }}</td>
+                                <td class="text-center">
+                                    <span class="badge bg-success">{{ order.status }}</span>
+                                </td>
+                                <td class="text-end fw-semibold">${{ order.amount_summa }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

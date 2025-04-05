@@ -1,0 +1,108 @@
+{% extends 'apps/base/include.html' %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="row align-items-start">
+        <!-- Settings (left side) -->
+        <div class="col-lg-8 pe-lg-2">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4">
+                    <h5 class="mb-0">Settings</h5>
+                </div>
+                <div class="card-body bg-light">
+                    <form class="row g-4" action="{% url 'settings' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="col-lg-6">
+                            <label for="id_first_name" class="form-label fw-bold">First name</label>
+                            <input type="text" name="first_name" value="{{ request.user.first_name }}" class="form-control shadow-sm" id="id_first_name" maxlength="30">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="id_last_name" class="form-label fw-bold">Last name</label>
+                            <input type="text" name="last_name" value="{{ request.user.last_name }}" class="form-control shadow-sm" id="id_last_name" maxlength="40">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="id_region" class="form-label fw-bold">Region</label>
+                            <select name="region" class="form-select shadow-sm" id="id_region">
+                                <option value="">Choose region</option>
+                                {% for region in regions %}
+                                    <option value="{{ region.id }}" {% if request.user.district.region.id == region.id %}selected{% endif %}>{{ region.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="id_district" class="form-label fw-bold">District</label>
+                            <select name="district_id" class="form-select shadow-sm" id="id_district">
+                                <option value="">Choose district</option>
+                                {% if request.user.district %}
+                                    <option value="{{ request.user.district.id }}">{{ request.user.district.name }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="id_location" class="form-label fw-bold">Adress</label>
+                            <input type="text" name="address" value="{{ request.user.address }}" class="form-control shadow-sm" id="id_location" maxlength="200">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="id_telegram_id" class="form-label fw-bold">Telegram ID</label>
+                            <input type="text" name="telegram_id" value="{{ request.user.telegram_id }}" class="form-control shadow-sm" id="id_telegram_id" maxlength="200">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="id_description" class="form-label fw-bold">About you</label>
+                            <textarea name="about" class="form-control shadow-sm" id="id_description" rows="4" maxlength="399">{% if request.user.about %}{{ request.user.about }}{% endif %}</textarea>
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-end">
+                            <button class="btn btn-primary px-4 py-2 shadow-sm rounded-pill" type="submit">💾 Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change Password (right side) -->
+        <div class="col-lg-4 ps-lg-2">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-danger text-white rounded-top-4">
+                    <h5 class="mb-0">🔒 Change password</h5>
+                </div>
+                <div class="card-body bg-light">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger shadow-sm" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <form action="{% url 'change-password' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="old-password" class="form-label fw-bold">Old password</label>
+                            <input type="password" class="form-control shadow-sm" id="old-password" name="old">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="new-password" class="form-label fw-bold">New password</label>
+                            <input type="password" class="form-control shadow-sm" id="new-password" name="new">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirm-password" class="form-label fw-bold">Repeat new password</label>
+                            <input type="password" class="form-control shadow-sm" id="confirm-password" name="confirm">
+                        </div>
+
+                        <button class="btn btn-danger w-100 py-2 shadow-sm rounded-pill" type="submit">🔄 Password update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

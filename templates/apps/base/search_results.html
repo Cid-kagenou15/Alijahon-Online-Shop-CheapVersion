@@ -1,0 +1,151 @@
+{% extends "apps/base/include.html" %}
+
+{% block body %}
+    <h2 class="text-center mb-4">🔍 Search Results</h2>
+
+    {% if search_query %}
+        <p class="text-center">You searched for: <strong>{{ search_query }}</strong></p>
+
+        {% if results %}
+            <div class="row" id="resultsContainer">
+                {% for product in results %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-lg product-card">
+                            <div class="card-img-top-container">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="/product/detail/{{ product.slug }}/" class="btn btn-primary btn-animated">View
+                                    Product</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-danger">No results found for "{{ search_query }}".</p>
+        {% endif %}
+    {% else %}
+        <p class="text-center">Please enter a search term.</p>
+    {% endif %}
+
+    <div class="text-center mt-3">
+        <a href="/search/" class="btn btn-secondary">🔙 Back to Search</a>
+    </div>
+
+    <style>
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top-container {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .btn-animated {
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .btn-animated::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s ease-in-out;
+        }
+
+        .btn-animated:hover::after {
+            left: 100%;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 250px; /* Adjust height */
+            object-fit: cover; /* Ensures it fits nicely */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            border-radius: 15px;
+            overflow: hidden;
+            padding: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card h5 {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card-footer {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .btn-primary {
+            background: #ff6b81;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #ff4757;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".product-card");
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = 1;
+                    card.style.transform = "translateY(0)";
+                }, index * 150);
+            });
+        });
+    </script>
+
+{% endblock %}

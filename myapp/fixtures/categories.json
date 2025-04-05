@@ -1,0 +1,106 @@
+[
+  {
+    "model": "myapp.Category",
+    "pk": 1,
+    "fields": {
+      "name": "For houses",
+      "icon": "https://img.icons8.com/external-becris-lineal-color-becris/100/external-home-literary-genres-becris-lineal-color-becris.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 2,
+    "fields": {
+      "name": "For kids",
+      "icon": "https://img.icons8.com/stickers/100/teddy-bear.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Prize",
+      "icon": "https://img.icons8.com/stickers/100/gift.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 4,
+    "fields": {
+      "name": "For woman",
+      "icon": "https://img.icons8.com/external-photo3ideastudio-gradient-photo3ideastudio/100/external-dress-travel-checklist-photo3ideastudio-gradient-photo3ideastudio.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 5,
+    "fields": {
+      "name": "Healing products",
+      "icon": "https://img.icons8.com/stickers/100/pill.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 6,
+    "fields": {
+      "name": "For men",
+      "icon": "https://img.icons8.com/external-wanicon-solid-wanicon/100/external-suit-autumn-clothes-accesories-wanicon-solid-wanicon.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 7,
+    "fields": {
+      "name": "Fitness",
+      "icon": "https://img.icons8.com/bubbles/100/dumbbell.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 9,
+    "fields": {
+      "name": "For cars",
+      "icon": "https://img.icons8.com/bubbles/100/bmw.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 10,
+    "fields": {
+      "name": "Books",
+      "icon": "https://img.icons8.com/bubbles/100/book-shelf.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 11,
+    "fields": {
+      "name": "Smartwatches",
+      "icon": "https://img.icons8.com/bubbles/100/apple-watch.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 12,
+    "fields": {
+      "name": "Perfume",
+      "icon": "https://img.icons8.com/pulsar-gradient/100/perfume.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 13,
+    "fields": {
+      "name": "New year's products",
+      "icon": "https://img.icons8.com/emoji/100/-emoji-christmas-tree.png"
+    }
+  },
+  {
+    "model": "myapp.Category",
+    "pk": 14,
+    "fields": {
+      "name": "Electronics",
+      "icon": "https://img.icons8.com/external-others-cattaleeya-thongsriphong/100/external-electronic-electronic-device-blue-others-cattaleeya-thongsriphong-3.png"
+    }
+  }
+]

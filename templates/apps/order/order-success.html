@@ -1,0 +1,21 @@
+{% extends 'apps/base/include.html' %}
+{% load humanize %}
+
+{% block body %}
+    <div class="card mb-4 mt-5 shadow-lg rounded p-4">
+        <div class="card-body text-center">
+            <h3 class="text-success mb-4">🎉 Order Placed Successfully! 🎉</h3>
+
+            <div class="mb-3">
+                <p class="lead">Order ID: <strong>{{ order.id }}</strong></p>
+                <p class="lead">Product: <strong>{{ order.product.name }}</strong></p>
+                <p class="lead">Stream: <strong>{{ order.stream.name }}</strong></p>
+                <p class="h4 text-warning">Subtotal: ${{ order.amount|floatformat:0|intcomma }}</p>
+            </div>
+
+            <div class="mt-4">
+                <a href="{% url 'market' %}" class="btn btn-primary btn-lg shadow-sm">Back to Market</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

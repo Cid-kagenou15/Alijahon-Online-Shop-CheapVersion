@@ -1,0 +1,74 @@
+{#============== phone number =================#}
+<script>
+    $('#phone-mask').inputmask({
+        "mask": "+\\9\\98(99) 999-99-99"
+    });
+    $('#messages-modal').modal('show');
+</script>
+
+{#============================ region -> districts =============#}
+
+<script>
+    $(document).ready(function () {
+        console.log("JavaScript Loaded!");  // Debugging
+
+        $("#id_region").change(function () {
+            var regionId = $(this).val();
+            console.log("Region selected:", regionId);  // Debugging
+
+            if (regionId) {
+                $.ajax({
+                    url: "{% url 'district-list' %}",
+                    data: {'region_id': regionId},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("Response received:", data);  // Debugging
+
+                        var districtDropdown = $("#id_district");
+                        districtDropdown.empty();
+                        districtDropdown.append('<option value="">Choose district</option>');
+
+                        $.each(data, function (key, district) {
+                            districtDropdown.append('<option value="' + district.id + '">' + district.name + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("AJAX Error:", xhr.responseText);  // Debugging
+                    }
+                });
+            } else {
+                $("#id_district").empty().append('<option value="">Choose ditrict</option>');
+            }
+        });
+    });
+</script>
+
+
+{#================== wish list like ====================== #}
+
+<script>
+    document.addEventListener("click", function (event) {
+        let button = event.target.closest(".like-button");
+        if (!button) return; // Exit if not clicking a like button
+
+        event.preventDefault();
+
+        let productId = button.dataset.productId;
+        console.log(`Button clicked for product ID: ${productId}`);
+
+        fetch(`/wishlist/${productId}`, {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Response received:", data);
+            button.classList.toggle("bg-danger", data.liked);
+            button.classList.toggle("text-white", data.liked);
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+
+
+
+

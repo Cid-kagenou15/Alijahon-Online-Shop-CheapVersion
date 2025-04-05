@@ -1,0 +1,87 @@
+{% extends 'apps/base/include.html' %}
+{% load humanize %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'app/assets/css/style.css' %}">
+{% block body %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="container border-bottom-4">
+                <div class="header_tab_menu ">
+                    <div class="header_menu active" style="overflow: auto">
+                        <a href="{% url 'product-list' 'all' %}"
+                           class="btn btn-default {% if session_category == None %}active{% endif %}">
+                            All
+                        </a>
+                        {% for category in categories %}
+                            <a href="{% url 'product-list' category.slug %}"
+                               class="btn btn-default {% if session_category and session_category.pk == category.pk %}active{% endif %}">
+                                {{ category.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="container" id="productsList">
+                <div class="content_grid">
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-6 mb-3 col-md-6 col-lg-4">
+                                <div class="border rounded-1 d-flex flex-column justify-content-between pb-3 product-card"
+                                     style="margin-top: 30px;">
+                                    <div class="overflow-hidden">
+                                        <div class="position-relative rounded-top overflow-hidden">
+                                            <a class="d-block" href="{% url 'product-detail' slug=product.slug %}">
+                                                <img class="img-fluid rounded-top product-img"
+                                                     src="{{ product.image.url }}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="p-2">
+                                            <h5 class="fs-0">
+                                                <a class="text-dark"
+                                                   href="{% url 'product-detail' slug=product.slug %}">
+                                                    {{ product.name }}
+                                                </a>
+                                            </h5>
+                                            <p class="fs--1 mb-2">
+                                                <a class="text-500"
+                                                   href="{% url 'product-list' product.category.slug %}">
+                                                    {{ product.category.name }}
+                                                </a>
+                                            </p>
+                                            <h5 class="fs-md-2 text-warning mb-2">
+                                                ${{ product.price|floatformat:2 }}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="rating-container">
+                                        <div class="rating">
+                                            <span class="fa fa-star text-warning"></span>
+                                            <span class="fa fa-star text-warning"></span>
+                                            <span class="fa fa-star text-warning"></span>
+                                            <span class="fa fa-star text-warning"></span>
+                                            <span class="fa fa-star text-300"></span>
+                                            <span class="ms-1 text-muted">(7)</span>
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-sm btn-falcon-default like-button {% if product.pk in liked_products_id %}bg-danger text-white{% endif %}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-product-id="{{ product.pk }}" title="Add to Wish List">
+                                                <span class="far fa-heart"></span>
+                                            </button>
+                                            <a class="btn btn-sm btn-falcon-default cart-button"
+                                               href="
+                                                       {% if not request.user.is_authenticated %}{% url 'auth' %}{% else %}{% url 'product-detail' slug=product.slug %}{% endif %}"
+                                               data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Cart">
+                                                <span class="fas fa-cart-plus"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,296 @@
+/* Default Light Mode Styles */
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.icon-wrapper img {
+    width: 50px;
+    height: 50px;
+    transition: filter 0.3s;
+}
+
+.font-sans-serif {
+    color: red !important;
+}
+
+.product-card {
+    margin-top: 20px;
+}
+
+.d-flex.justify-content-between.px-3 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px;
+    flex-wrap: nowrap;
+}
+
+.rating-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.like-button, .cart-button {
+    padding: 5px 8px;
+    min-width: 35px;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+}
+
+.dark-mode .font-sans-serif {
+    color: #ff4c4c !important;
+}
+
+.dark-mode .icon-wrapper img {
+    filter: brightness(0.8);
+}
+
+.dark-mode a {
+    color: #76baff;
+}
+
+.dark-mode .product-card {
+    background-color: #222;
+    border: 1px solid #444;
+}
+
+.dark-mode .like-button, .dark-mode .cart-button {
+    background-color: #333;
+    color: #f8f9fa;
+    border: 1px solid #555;
+}
+
+.dark-mode .like-button:hover, .dark-mode .cart-button:hover {
+    background-color: #555;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px; /* Adjust spacing between buttons */
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+}
+
+.product-img {
+    width: 100%;
+    height: 230px; /* Adjust as needed */
+    object-fit: contain; /* Prevents cropping */
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center; /* Centers the buttons */
+    align-items: center;
+    gap: 6px; /* Adjust spacing between buttons */
+    padding-bottom: 10px; /* Add bottom padding */
+}
+
+h5.fs-md-2.text-warning {
+    font-size: 1.2rem; /* Slightly smaller */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* ----------- For like ----------------- */
+
+.text-gradient {
+    background: linear-gradient(45deg, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.custom-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.wishlist-btn.active {
+    background: #e52e71;
+    color: white;
+}
+
+.custom-card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-title a {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.category {
+    font-size: 14px;
+    color: #777;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff8a00;
+}
+
+.rating {
+    color: #ff8a00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-count {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #777;
+}
+
+.custom-card-footer {
+    padding: 10px;
+    text-align: center;
+    background: #f8f9fa;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.view-btn {
+    text-decoration: none;
+    font-size: 14px;
+    color: #e52e71;
+    font-weight: bold;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.product-card .overflow-hidden {
+    flex-grow: 1;
+}
+
+.product-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* Make sure content inside expands properly */
+.product-card .overflow-hidden {
+    flex-grow: 1;
+}
+
+/* Fix inconsistent image sizes */
+.product-img {
+    width: 100%;
+    height: 250px; /* Ensures all images are the same height */
+    object-fit: cover; /* Prevents distortion */
+}
+
+/* Align rating and buttons properly */
+.rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+/* Ensure buttons align properly */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+

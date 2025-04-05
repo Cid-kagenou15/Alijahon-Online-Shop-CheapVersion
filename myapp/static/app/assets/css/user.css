@@ -1,0 +1,53 @@
+/* Ensure full height for the container */
+.content_auth_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Center the form group */
+.content_auth_form_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Style the card */
+.card {
+    width: 100%;
+    max-width: 400px; /* Adjust based on preference */
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure form fields are styled properly */
+.form-control {
+    height: 45px;
+    font-size: 16px;
+}
+
+/* Center the error messages */
+h3 {
+    text-align: center;
+    color: red;
+}
+
+.is-invalid {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
+
+.invalid-feedback {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.font-sans-serif {
+    color: red !important;
+}
+

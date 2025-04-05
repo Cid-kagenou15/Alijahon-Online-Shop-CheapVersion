@@ -1,0 +1,140 @@
+{% extends 'apps/base/include.html' %}
+{% load humanize %}
+
+{% block body %}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body bg-light">
+
+            <!-- Modal for Stream Creation -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title" id="exampleModalLabel">Create a Stream</h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body bg-white">
+                            <form method="POST" action="{% url 'create-stream' %}" class="form-class">
+                                {% csrf_token %}
+                                <input type="hidden" name="product" id="hidden_product" value="">
+
+                                <div class="form-group">
+                                    <label for="id_title" class="text-primary fw-bold">Stream Name</label>
+                                    <input type="text" name="name" class="form-control border-primary"
+                                           placeholder="Enter stream name" required id="id_title">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="id_discount" class="text-danger fw-bold">Discount</label>
+                                    <input type="text" name="discount_sum" class="form-control border-danger"
+                                           id="id_discount">
+                                </div>
+
+                                <button type="submit" class="btn btn-success mt-4 w-100">Create Stream</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="container">
+                {% if messages %}
+                    <div class="alert alert-warning text-center">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <h3 class="text-center mt-4 text-primary fw-bold">🔥 Hot Deals & Products on Sale 🔥</h3>
+
+                <div class="container mt-4 border-bottom p-3 rounded bg-white shadow-sm">
+                    <div class="header_tab_menu d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="header_menu d-flex flex-wrap">
+                            <a href="{% url 'market' %}?category=all" class="btn btn-dark me-2">All</a>
+                            <a href="{% url 'market' %}?category=top" class="btn btn-warning me-2">Top Products</a>
+                            {% for category in categories %}
+                                <a href="{% url 'market' %}?category={{ category.slug }}"
+                                   class="btn btn-info me-2 text-white">
+                                    {{ category.name }}
+                                </a>
+                            {% endfor %}
+                        </div>
+
+                        <div class="search-box mt-3">
+                            <form action="{% url 'market' %}" method="GET" class="d-flex position-relative w-100">
+                                <input id="search-input" name="q" class="form-control search-input border-primary"
+                                       type="search" placeholder="🔍 Search..." aria-label="Search">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    {% for product in products %}
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-2">
+                            <div class="card shadow-sm border-0 rounded-lg">
+                                <a href="{% url 'product-detail' product.slug %}" target="_blank">
+                                    <img class="card-img-top rounded-top" src="{{ product.image.url }}"
+                                         alt="{{ product.name }}">
+                                </a>
+                                <div class="card-body text-center" style="background-color: #f7f7f7;">
+                                    <h5 class="card-title">
+                                        <a href="{% url 'product-detail' product.slug %}"
+                                           class="text-dark text-decoration-none fw-bold">
+                                            {{ product.name }}
+                                        </a>
+                                    </h5>
+                                    <p class="fs-5 fw-bold">$ {{ product.price|floatformat:0|intcomma }}</p>
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item bg-light">💰 Payment: <strong
+                                            class="text-success">{{ product.sell_price }}</strong></li>
+                                    <li class="list-group-item bg-light">📦 In Stock: <strong
+                                            class="text-info">{{ product.quantity }} pcs</strong></li>
+                                    <li class="list-group-item bg-light">🔖 Discount: <strong
+                                            class="text-danger">{{ product.sale }}</strong></li>
+                                </ul>
+
+                                <div class="card-footer text-center bg-white">
+                                    {% if product.telegram_url %}
+                                        <a href="{{ product.telegram_url }}" class="btn btn-danger w-100 mb-2">📢
+                                            Advertisement Post</a>
+                                    {% endif %}
+                                    <button class="btn btn-success btn_open_modal w-100 mb-2" type="button"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-bs-sell_price="{{ product.sell_price }}" name="{{ product.id }}">
+                                        🎥 Create a Stream
+                                    </button>
+                                    <a href="{% url 'product-detail' product.slug %}"
+                                       class="btn btn-outline-primary w-100">
+                                        🔍 More Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="col-12 text-center">
+                            <h5 class="text-muted">🚀 No products available at the moment. Stay tuned!</h5>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.btn_open_modal').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    document.getElementById('hidden_product').value = this.getAttribute('name');
+                });
+            });
+        });
+    </script>
+{% endblock %}

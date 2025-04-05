@@ -1,0 +1,58 @@
+{% extends "apps/base/include.html" %}
+
+{% block body %}
+    <div class="content_auth_form d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg p-4 rounded-3" style="max-width: 400px; width: 100%;">
+            <form method="post" action="{% url 'auth' %}">
+                {% csrf_token %}
+                <div class="card-header text-center bg-primary text-white py-3 rounded-3">
+                    <h3 class="fw-bold">Login</h3>
+                </div>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-success text-center mt-2 p-2" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="phone-mask">📱 Phone number</label>
+                        <input type="text" name="phone_number" id="phone-mask" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="split-login-password">🔑 Parol</label>
+                        <input class="form-control" name="password" id="split-login-password" type="password" required>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="split-checkbox" required>
+                        <label class="form-check-label" for="split-checkbox">
+                            I have read the rules.
+                        </label>
+                    </div>
+
+                    <button class="btn btn-primary w-100 fw-semibold" type="submit">
+                        🔓 Login
+                    </button>
+
+                    <div class="text-center mt-3">
+                        <small class="text-muted">Terms of Use</small>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="text-center">
+                        <p class="mb-1">Don't have an account?</p>
+                        <a href="{% url 'register' %}" class="btn btn-outline-primary w-100">
+                            📝 Sign up
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

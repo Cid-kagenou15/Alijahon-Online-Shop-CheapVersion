@@ -1,0 +1,38 @@
+[
+  { "model": "myapp.district", "pk": 101, "fields": { "name": "Bektemir tumani", "region": 1 } },
+  { "model": "myapp.district", "pk": 102, "fields": { "name": "Mirobod tumani", "region": 1 } },
+  { "model": "myapp.district", "pk": 103, "fields": { "name": "Shayxontohur tumani", "region": 1 } },
+
+  { "model": "myapp.district", "pk": 201, "fields": { "name": "Andijon tumani", "region": 2 } },
+  { "model": "myapp.district", "pk": 202, "fields": { "name": "Asaka tumani", "region": 2 } },
+
+  { "model": "myapp.district", "pk": 301, "fields": { "name": "Buxoro tumani", "region": 3 } },
+  { "model": "myapp.district", "pk": 302, "fields": { "name": "G‘ijduvon tumani", "region": 3 } },
+
+  { "model": "myapp.district", "pk": 401, "fields": { "name": "Farg‘ona tumani", "region": 4 } },
+  { "model": "myapp.district", "pk": 402, "fields": { "name": "Oltiariq tumani", "region": 4 } },
+
+  { "model": "myapp.district", "pk": 501, "fields": { "name": "Jizzax tumani", "region": 5 } },
+  { "model": "myapp.district", "pk": 502, "fields": { "name": "Zafarobod tumani", "region": 5 } },
+
+  { "model": "myapp.district", "pk": 601, "fields": { "name": "Qarshi tumani", "region": 6 } },
+  { "model": "myapp.district", "pk": 602, "fields": { "name": "G‘uzor tumani", "region": 6 } },
+
+  { "model": "myapp.district", "pk": 701, "fields": { "name": "Namangan tumani", "region": 7 } },
+  { "model": "myapp.district", "pk": 702, "fields": { "name": "Pop tumani", "region": 7 } },
+
+  { "model": "myapp.district", "pk": 801, "fields": { "name": "Navoiy tumani", "region": 8 } },
+  { "model": "myapp.district", "pk": 802, "fields": { "name": "Zarafshon shahri", "region": 8 } },
+
+  { "model": "myapp.district", "pk": 901, "fields": { "name": "Samarqand tumani", "region": 9 } },
+  { "model": "myapp.district", "pk": 902, "fields": { "name": "Urgut tumani", "region": 9 } },
+
+  { "model": "myapp.district", "pk": 1001, "fields": { "name": "Guliston tumani", "region": 10 } },
+  { "model": "myapp.district", "pk": 1002, "fields": { "name": "Sayxunobod tumani", "region": 10 } },
+
+  { "model": "myapp.district", "pk": 1101, "fields": { "name": "Xiva tumani", "region": 11 } },
+  { "model": "myapp.district", "pk": 1102, "fields": { "name": "Urganch tumani", "region": 11 } },
+
+  { "model": "myapp.district", "pk": 1201, "fields": { "name": "Termiz tumani", "region": 12 } },
+  { "model": "myapp.district", "pk": 1202, "fields": { "name": "Denov tumani", "region": 12 } }
+]

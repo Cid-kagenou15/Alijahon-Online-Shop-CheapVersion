@@ -1,0 +1,65 @@
+{% extends 'apps/base/include.html' %}
+{% load humanize %}
+
+{% block body %}
+    <div class="card mb-4 shadow-sm rounded p-4">
+        <div class="card-body">
+            <div class="row">
+                <!-- Product Image -->
+                <div class="col-lg-6 d-flex justify-content-center align-items-center mb-4 mb-lg-0">
+                    <img src="{{ product.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
+                </div>
+
+                <!-- Product Details & Order Form -->
+                <div class="col-lg-6">
+                    <h3 class="mb-3 text-primary">{{ product.name }}</h3>
+                    <p class="text-muted">{{ product.description|safe }}</p>
+                    <h4 class="text-warning mt-3">${{ product.price|floatformat:0|intcomma }}</h4>
+
+                    <form action="{% url 'order' product.pk %}" method="post" class="mt-4">
+                        {% csrf_token %}
+
+                        <!-- Name Field -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input class="form-control form-control-lg" id="name" name="last_name" type="text" required>
+                            <input class="form-control" name="product_id" value="{{ product.id }}" type="hidden">
+                        </div>
+
+                        <!-- Phone Number Field -->
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone number:</label>
+                            <input class="form-control form-control-lg" id="phone" name="phone_number" type="text"
+                                   required>
+                        </div>
+
+                        <!-- Quantity Field -->
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity:</label>
+                            <input class="form-control form-control-lg" id="quantity" name="quantity" type="number"
+                                   min="1" value="1" required>
+                        </div>
+
+                        <!-- Stream Selection (Now Optional) -->
+                        <div class="mb-3">
+                            <label for="stream" class="form-label">Select Stream (Optional):</label>
+                            <select class="form-control form-control-lg" id="stream" name="stream">
+                                <option value="">-- No Stream Selected --</option>
+                                {% for stream in streams %}
+                                    <option value="{{ stream.id }}">{{ stream.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% if not streams %}
+                                <p class="text-muted mt-2">No streams available. <a href="{% url 'create-stream' %}">Create
+                                    a Stream</a></p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Order Button -->
+                        <button class="btn btn-primary w-100 shadow-sm" type="submit">Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

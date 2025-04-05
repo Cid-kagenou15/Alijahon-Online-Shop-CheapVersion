@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Operatorlar bo'limi - alijahon.uz</title>
+    <link rel="stylesheet" href="{% static 'apps/bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'apps/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: #2c3e50 !important;
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #ecf0f1 !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #3498db !important;
+        }
+
+        .navbar h4 {
+            color: #ecf0f1;
+            margin: 0 20px;
+        }
+
+        .sidebar {
+            background-color: #1abc9c;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            width: 200px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .list-group-item {
+            background-color: #16a085;
+            color: #fff;
+            border: none;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar .list-group-item:hover {
+            background-color: #138d75;
+        }
+
+        .sidebar .list-group-item.active {
+            background-color: #3498db;
+            font-weight: bold;
+        }
+
+        .sidebar .list-group-item i {
+            margin-right: 8px;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 30px;
+        }
+
+        .filter-form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .filter-form label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .filter-form .form-control, .filter-form select {
+            border-radius: 8px;
+            border: 1px solid #dcdcdc;
+            padding: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-form .form-control:focus, .filter-form select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .filter-form button {
+            background-color: #3498db;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-form button:hover {
+            background-color: #2980b9;
+        }
+
+        .order-card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .order-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .order-card .card-body {
+            padding: 20px;
+        }
+
+        .order-card .card-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .order-card .card-title.text-danger {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .order-card ul {
+            list-style: none;
+            padding: 0;
+            color: #7f8c8d;
+        }
+
+        .order-card ul li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .order-card .btn-primary {
+            background-color: #3498db;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-card .btn-primary:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar navbar-dark text-white">
+    <div style="margin-left: 15px;"><a href="/operator/product_add">Zakaz +</a></div>
+    <div>Buyurtmalar</div>
+    <h4>ID: {{ user.id }}</h4>
+    <a href="{% url 'home' %}" class="btn btn-danger btn-sm">Asosiy panel</a>
+</div>
+
+<div class="sidebar">
+    <div class="list-group text-light">
+        {% for s in status %}
+            <a href="{% url 'operator' %}?status={{ s }}"
+               class="list-group-item text-light mt-1 {% if not request.GET.status and s == 'new' %} active {% elif request.GET.status == s %} active {% endif %}">
+                <div>
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    <h6>{{ s|title }}</h6>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="content">
+    <div class="filter-form w-75">
+        <form method="post" action="{% url 'operator' %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="id_category">Category:</label>
+                    <select name="category_id" class="form-control">
+                        <option value="">All category</option>
+                        {% for category in categories %}
+                            <option value="{{ category.pk }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="id_region">Region:</label>
+                    <select class="form-control" id="id_region">
+                        <option value="">All selected</option>
+                        {% for region in regions %}
+                            <option value="{{ region.pk }}" {% if district_region == region.pk %} selected {% endif %}>{{ region.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="id_district">Shahar/Tuman:</label>
+                    <select class="form-control" id="id_district" name="district_id">
+                        <option value="">Tumanni tanlang</option>
+                        {% if district %}
+                            <option value="{{ district.pk }}" selected>{{ district.name }}</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+            <input type="hidden" name="status" value="{{ request.GET.status }}">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="w-75">
+        {% for order in orders %}
+            <div class="card order-card">
+                <div class="card-body">
+                    <h2 class="card-title">{{ order.product.name }} - {{ order.amount|floatformat:0 }} so'm</h2>
+                    <h3 class="card-title text-danger">ZAKAZ ID: #{{ order.id }}</h3>
+                    <ul>
+                        {% if order.thread %}
+                            <li>Reklama tarqatuvchi ID: {{ order.thread.owner.id }}</li>
+                        {% endif %}
+                        <li>Client: {{ order.name }} - +9989XXXXXXXX</li>
+                        <li>Address: {{ order.district.region.name }}, {{ order.district.name }}</li>
+                        <li>Narxi: {{ order.amount|floatformat:0 }} so'm</li>
+                        <li>Soni: {{ order.quantity }}ta</li>
+                        <li>Vaqti: {{ order.ordered_at|date:'Y-m-d H:i:s' }}</li>
+                        <li>Yangilangan vaqti: {{ order.update_at|date:'Y-m-d H:i:s' }}</li>
+                        <li>Holati: {{ order.status }}</li>
+                    </ul>
+                    <a href="{% url 'order-change' order.pk %}" class="btn btn-primary">Qabul qilish</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+<script src="{% static 'apps/js/regions_filter.js' %}"></script>
+<script>
+    $(function () {
+        $('select').multipleSelect({
+            multiple: true,
+            multipleWidth: 500,
+            maxHeight: 200,
+            maxHeightUnit: 50,
+            filter: true
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#id_region').change(function () {
+            var regionId = $(this).val();
+            var $districtSelect = $('#id_district');
+            $districtSelect.empty();
+            $districtSelect.append('<option value="">Tumanni tanlang</option>');
+
+            if (regionId) {
+                $.ajax({
+                    url: 'operator/ajax/get-districts/' + regionId + '/',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function (index, district) {
+                            $districtSelect.append('<option value="' + district.id + '">' + district.name + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('An error occurred:', error);
+                    }
+                });
+            }
+        });
+    });
+</script>
+{% include 'apps/base/scripts.html' %}
+</body>
+</html>
